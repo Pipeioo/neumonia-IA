@@ -5,26 +5,27 @@ from urllib.request import Request
 from tensorflow.python.keras.layers import LSTM, Dense
 from fastapi.middleware.cors import CORSMiddleware
 """
+"""You should run it over following requirements
+
+keras==2.2.4 tensorflow==1.15.0 pillow==7.0.0"""
+import tensorflow as tf
 from fastapi import FastAPI
 from PIL import Image, UnidentifiedImageError
-
-app = FastAPI()
-
-import keras
 from keras._tf_keras.keras.preprocessing.image import img_to_array
-"from keras.src.utils.image_utils import img_to_array"
 from tensorflow.python.keras.models import load_model
 from io import BytesIO
 import numpy as np
 import requests
 
+app = FastAPI()
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
-def procesoImagen(urlImagen):
+def procesoImagen(urlImagen="https://res.cloudinary.com/dvxhko0bg/image/upload/v1723812265/vcgnacwh88nvvakdxn8j.jpg"):
 
-    model = load_model('model/modelo.h5')
+    model = load_model('model/modelo4.h5')
 
     """
     CODIGO SOLO PARA URL LOCAL:
