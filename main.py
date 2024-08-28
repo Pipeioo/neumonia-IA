@@ -12,29 +12,23 @@ import tensorflow as tf
 from fastapi import FastAPI
 from PIL import Image, UnidentifiedImageError
 from keras._tf_keras.keras.preprocessing.image import img_to_array
-from tensorflow.python.keras.models import load_model
+from tensorflow.keras.models import load_model
+"from tensorflow.python.keras.models import load_model"
 from io import BytesIO
 import numpy as np
 import requests
+
+    
 
 app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"/modeloIA?imagen=(tuURL)"}
 
-def procesoImagen(urlImagen="https://res.cloudinary.com/dvxhko0bg/image/upload/v1723812265/vcgnacwh88nvvakdxn8j.jpg"):
-
+def procesoImagen(urlImagen):
+    
     model = load_model('model/modelo4.h5')
-
-    """
-    CODIGO SOLO PARA URL LOCAL:
-    imagen = load_img(urlImagen, target_size=(150, 150))
-    imagen_array2 = img_to_array(imagen)
-    imagen_array2 = np.expand_dims(imagen_array2, axis=0)  # Añadir una dimensión para el batch
-    imagen_array2 /= 255.0  # Escalar los valores de los píxeles
-    """
-    "CODIGO NUEVO QUE TOMA URL ONLINE"
     
     response = requests.get(urlImagen)
     imagen = Image.open(BytesIO(response.content))
@@ -46,9 +40,12 @@ def procesoImagen(urlImagen="https://res.cloudinary.com/dvxhko0bg/image/upload/v
     imagen_array /= 255.0  # Escalar los valores de los píxeles
 
     # Hacer la predicción
-    prediccion = model.predict(imagen_array)
+
+    prediccion = model.predict(imagen_array)[0][0]
+
 
     return prediccion * 100
+
 
 @app.get("/modeloIA")
 async def get_image(imagen):
