@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\47653603\neumonia-IA\modeloIA"
+VIRTUAL_ENV="C:\Users\PC\Documents\neumonia-IA\modeloIA"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

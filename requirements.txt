@@ -1,1 +1,6 @@
 fastapi[all]
+pillow 
+tensorflow
+keras
+numpy
+requests
