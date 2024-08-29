@@ -18,7 +18,7 @@ def procesoImagen(urlImagen):
 
     model = load_model('model/modelo4.h5')
     
-    """response = requests.get(urlImagen)
+    response = requests.get(urlImagen)
     imagen = Image.open(BytesIO(response.content))
     imagen = imagen.convert('RGB')
 
@@ -30,12 +30,11 @@ def procesoImagen(urlImagen):
     # Hacer la predicción
     prediccion = model.predict(imagen_array)[0][0]
 
-    return prediccion * 100"""
-    return 1
+    return prediccion * 100
 
 @app.get("/modeloIA")
 async def get_image(imagen):
-    prediccion = procesoImagen("https://res.cloudinary.com/dvxhko0bg/image/upload/v1724769162/vhjwf2uzxuuafl4xsahv.jpg")
+    prediccion = procesoImagen(imagen)
     return {"prediccion" : prediccion}
 
 """
