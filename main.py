@@ -14,6 +14,8 @@ app = FastAPI()
 async def root():
     return {"/modeloIA?imagen=(tuURL)"}
 
+    #TENGO QUE HOSTEAR LA IA EN ALGUN LADO ASI LA PUEDE LEVANTAR RENDER. GIT LFS
+
 def procesoImagen(urlImagen):
 
     model = load_model('model/modelo4.h5')
