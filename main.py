@@ -37,7 +37,7 @@ def procesoImagen(urlImagen):
 @app.get("/modeloIA")
 async def get_image(imagen):
     prediccion = procesoImagen(imagen)
-    return {"prediccion" : prediccion}
+    return {prediccion}
 
 """
 app.add_middleware(z
