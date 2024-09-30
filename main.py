@@ -7,6 +7,8 @@ from tensorflow.keras.models import load_model
 from io import BytesIO
 import numpy as np
 import requests
+import uvicorn
+from os import getenv
 
 app = FastAPI()
 
@@ -39,6 +41,10 @@ async def get_image(imagen):
     prediccion = procesoImagen(imagen)
     return {prediccion}
 
+if __name__ == "__main__":
+    port = int(getenv("PORT", 8000))
+    uvicorn.run("main:app",host="0.0.0.0",port=port,reload=True)
+
 """
 app.add_middleware(z
     CORSMiddleware,
@@ -55,8 +61,5 @@ async def predict(request: Request):
     
     return {"item_id": item_id, "q": q}
     
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app,host="0.0.0.0", port=8000, reload=True)
 
 """
