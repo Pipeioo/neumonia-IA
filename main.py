@@ -9,6 +9,10 @@ import numpy as np
 import requests
 import uvicorn
 from os import getenv
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 
 app = FastAPI()
 
@@ -45,6 +49,14 @@ if __name__ == "__main__":
     port = int(getenv("PORT", 8000))
     uvicorn.run("main:app",host="0.0.0.0",port=port,reload=True)
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # or restrict to your frontend's domain
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 """
 app.add_middleware(z
     CORSMiddleware,
